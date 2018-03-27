@@ -2,7 +2,7 @@
 # Cargamos los DATOS y los TRANSFORMAMOS
 #=======================================================================================
 # Cargamos la proyección de PM
-p_pgc <- read_excel("/home/tclondono/CODIGO/INPUT/PGC.xlsx")
+p_pgc <- read_excel("INPUT/PGC.xlsx")
 colnames(p_pgc) <- c("GEN","CEDI","FLUJO","TAREA",
                      "Semana 1","Semana 2","Semana 3","Semana 4","Semana 5")
 #=======================================================================================
@@ -13,7 +13,7 @@ p_pgc <- p_pgc %>% gather("Semana 1","Semana 2","Semana 3","Semana 4","Semana 5"
 #=======================================================================================
 # Cargamos el histórico de PCG:
 #=======================================================================================
-wms_pgc <- read_excel("/home/tclondono/CODIGO/INPUT/wms_PGC.xlsx")
+wms_pgc <- read_excel("INPUT/wms_PGC.xlsx")
 
 inicio <- as.Date(min(wms_pgc$FECHA))
 fin <- as.Date(max(wms_pgc$FECHA))

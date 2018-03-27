@@ -18,7 +18,10 @@ f_co<-data.frame(f_co)
 
 
 f_hi<-data.table(merge(wms_pgc,comb[k,]
-                       ,by.x = c("Dep_Despacha_ID","Flujo_Logistico","Tarea","Agrupacion_ID")
+                       ,by.x = c("Dep_Despacha_ID",
+                                 "Flujo_Logistico",
+                                 "Tarea",
+                                 "Agrupacion_ID")
                        ,by.y=c("CEDI","FLUJO","TAREA","AGRUPAMIENTO") ))
 f_hi<-f_hi[order(FECHA)]
 f_hi<-data.frame(f_hi)
