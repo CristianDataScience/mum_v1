@@ -2,7 +2,6 @@
 # Estos filtros se deben automatizar
 #=======================================================================================
 options(scipen=999)
-k=17
 
 comb<-data.table(unique(cruze[c("CEDI","FLUJO","TAREA","AGRUPAMIENTO")]))
 indice_semana <- unique(Marzo$semana)
@@ -100,5 +99,6 @@ if(k==1){
 # Multiplicar unidades por densidad 
 #=======================================================================================
 conso_tempo$unidades_diarias<-conso_tempo$densidad*conso_tempo$UNIDADES
+
 
 

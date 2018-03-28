@@ -155,13 +155,22 @@ centros <- function(filtro_historico){
     summarise(S_Unidades=sum(Unidades)) 
   # Calculamos las densidades comerciales:
   filtro_historico <- dens.comercial(filtro_historico)
+  # Quitamos las semanas que no movilizaron unidades
+  sem <- unique(filtro_historico$semana)
+    for (i in sem){
+      if (sum(filter(filtro_historico,semana==i)$suma_unidades)==0){
+      
+      filtro_historico <- filtro_historico %>% filter(semana != i)
+    } 
+  }
+  #
   dc2 <- filtro_historico %>% select(Agrupacion_ID,dens_comercial,semana)
   # Ubicamos las densidades de secos y frescos en dos columnas
   dc2 <- spread(dc2,key=Agrupacion_ID, value = dens_comercial)
-  # Borramos los NAS EN CASO DE QUE EXISTAN
+  # Creamos los nombres de las columnas y llenamos con ceros en caso de que no existan 
   if(sum(names(dc2)=="4001")==0){dc2$"4001"<-0}
   if(sum(names(dc2)=="4002")==0){dc2$"4002"<-0}
-  
+  # Borramos los NAS EN CASO DE QUE EXISTAN
   dc2$"4001" = ifelse(is.na(dc2$"4001"), 0, dc2$"4001")
   dc2$"4002" = ifelse(is.na(dc2$"4001"), 0, dc2$"4002")
   #=====================================================================================
