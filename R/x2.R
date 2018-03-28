@@ -2,6 +2,7 @@
 # Cargamos los DATOS y los TRANSFORMAMOS
 #=======================================================================================
 # Cargamos la proyección de PM
+
 p_pgc <- read_excel("INPUT/PGC.xlsx")
 colnames(p_pgc) <- c("GEN","CEDI","FLUJO","TAREA",
                      "Semana 1","Semana 2","Semana 3","Semana 4","Semana 5")
@@ -14,11 +15,15 @@ p_pgc <- p_pgc %>% gather("Semana 1","Semana 2","Semana 3","Semana 4","Semana 5"
 # Cargamos el histórico de PCG:
 #=======================================================================================
 wms_pgc <- read_excel("INPUT/wms_PGC.xlsx")
-
+#=======================================================================================
+# Guardamos todas las fechas desde 01/09/2016 hasta 28/02/2018
+#=======================================================================================
 inicio <- as.Date(min(wms_pgc$FECHA))
 fin <- as.Date(max(wms_pgc$FECHA))
 all_date <- data.frame(FECHA=seq(inicio, fin, by = "day"))
-
+#=======================================================================================
+# Vamos a cruzar todas las fechas con el historico de wms_pgc
+#=======================================================================================
 llave<-unique(wms_pgc[,c("Dep_Despacha_ID","Flujo_Logistico","Tarea","Agrupacion_ID")])
 total<-merge(all_date,llave)
 tmp<-unique(wms_pgc[,c("FECHA","Dep_Despacha_ID","Flujo_Logistico","Tarea","Agrupacion_ID","Unidades")])
@@ -35,7 +40,7 @@ rm(bk,tmp,inicio,fin,llave,total)
 #=======================================================================================
 # Cargamos la información del CALENDARIO
 #=======================================================================================
-dia_ca <- data.frame(read_excel("/home/tclondono/CODIGO/INPUT/dia_ca.xlsx"))
+dia_ca <- data.frame(read_excel("INPUT/dia_ca.xlsx"))
 dia_ca$FECHA<-as.Date(dia_ca$FECHA)
 
 #=======================================================================================

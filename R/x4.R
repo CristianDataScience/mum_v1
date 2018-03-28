@@ -8,8 +8,8 @@ filtro.cedi <- function(proyeccion_pgc,historia_wms){
   
   dis_flujo <- unique(p_pgc$FLUJO)
   dis_tarea <- unique(p_pgc$TAREA)
-  #cedis<-unique(p_pgc$CEDI)
-  cedis <- c(20,50,85,146,137,138)    
+  cedis <- unique(p_pgc$CEDI)
+  #cedis <- c(20,50,85,146,137,138)    
   
   conso <- data.frame() # inicializamos 
   

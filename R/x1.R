@@ -1,7 +1,8 @@
 #=======================================================================================
 # cargamos las LIBRERIAS y las FUNCIONES 
 #=======================================================================================
-
+#setwd("~/Proyecto_mum_v1/R")
+#source("librerias.R")
 library(readxl)
 library(RODBC)
 library(dplyr)
@@ -120,18 +121,18 @@ numerog <- function(datos){
 #=======================================================================================
 # Cargamos la funcion td() para CONSULTA SQL
 #=======================================================================================
-td <- function (server = 'SQL Server', uid = 'tclondono', pwd = 'tclondono01',
-                query ){
-  char <- paste("Driver=Teradata;DBCName=", server, ";UID=", uid, "PWD=", pwd);
-  #ch <- odbcDriverConnect(char);    # Crea conexión
-  ch <- odbcConnect(dsn= server, uid = uid, pwd = pwd)
-  data <- sqlQuery(ch, query);      # Ejecuta consulta
-  odbcClose(ch);                    # Cierra conexión
-  rm(char, ch);                     # Remueve variables
-  return(data);                     # Devuelve resultados de la consulta
-}
-query <- paste(readLines("D:/3.Scripts R/Piloto_PGC_FRESCOS/prueba_consulta_SQL.txt"),
-               collapse = " ",warn=FALSE) # el script sin ; y con un enter al final
+#td <- function (server = 'SQL Server', uid = 'tclondono', pwd = 'tclondono01',
+#                query ){
+#  char <- paste("Driver=Teradata;DBCName=", server, ";UID=", uid, "PWD=", pwd);
+#  #ch <- odbcDriverConnect(char);    # Crea conexión
+#  ch <- odbcConnect(dsn= server, uid = uid, pwd = pwd)
+#  data <- sqlQuery(ch, query);      # Ejecuta consulta
+#  odbcClose(ch);                    # Cierra conexión
+#  rm(char, ch);                     # Remueve variables
+#  return(data);                     # Devuelve resultados de la consulta
+#}
+#query <- paste(readLines("D:/3.Scripts R/Piloto_PGC_FRESCOS/prueba_consulta_SQL.txt"),
+#               collapse = " ",warn=FALSE) # el script sin ; y con un enter al final
 #query <- gsub("__VAR1__", "20, 85, 146", query) # para cambiar cosas en el query
 #data <- as_tibble(td(query=query)) # para que le guarde otros atributos
 #=======================================================================================
