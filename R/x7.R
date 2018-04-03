@@ -1,45 +1,42 @@
 #=======================================================================================
 # Estos filtros se deben automatizar
 #=======================================================================================
-options(scipen=999)
+options(scipen=999) # notacion normal
 
-comb<-data.table(unique(cruze[c("CEDI","FLUJO","TAREA","AGRUPAMIENTO")]))
+comb <- data.table(unique(cruze[c("CEDI","FLUJO","TAREA","AGRUPAMIENTO")]))
 indice_semana <- unique(Marzo$semana)
 
 for(k in 1:nrow(comb)){
   dia_densidad <- data.frame() 
-f_co<-data.table(merge(cruze,comb[k,],by =c("CEDI","FLUJO","TAREA","AGRUPAMIENTO") ))
-f_co<-f_co[order(Fecha)]
-f_co<-data.frame(f_co)
+f_co <- data.table(merge(cruze,comb[k,], by=c("CEDI","FLUJO","TAREA","AGRUPAMIENTO")))
+f_co <- f_co[order(Fecha)]
+f_co <- data.frame(f_co)
 #=======================================================================================
 # Ahora filtramos la correspondiente serie del historico
 #=======================================================================================
-
-
-f_hi<-data.table(merge(wms_pgc,comb[k,]
+f_hi <- data.table(merge(wms_pgc,comb[k,]
                        ,by.x = c("Dep_Despacha_ID",
                                  "Flujo_Logistico",
                                  "Tarea",
                                  "Agrupacion_ID")
-                       ,by.y=c("CEDI","FLUJO","TAREA","AGRUPAMIENTO") ))
-f_hi<-f_hi[order(FECHA)]
-f_hi<-data.frame(f_hi)
+                       ,by.y=c("CEDI","FLUJO","TAREA","AGRUPAMIENTO")))
+
+f_hi <- f_hi[order(FECHA)]
+f_hi <- data.frame(f_hi)
 
 f_hi<-data.table(f_hi)
 
 #if (nrow(f_hi_m)==0){next}
 f_hi[,maximo:=max(Unidades),by=c("Semana_mes","mes","ano")]
-f_hi<-f_hi[maximo>0,]
-f_hi<-data.frame(f_hi)
-f_hi$maximo<-NULL
+f_hi <- f_hi[maximo>0,]
+f_hi <- data.frame(f_hi)
+f_hi$maximo <- NULL
 
 if (nrow(f_hi)==0){next}
 
 #=======================================================================================
 # Programamos para una serie en particular las DENSIDADES
 #=======================================================================================
-
-
 for (j in indice_semana){
   
 
@@ -48,12 +45,12 @@ for (j in indice_semana){
                               tipo_semana==S_M$tipo_semana[j], 
                               dia_semana %in% (8-S_M$n[j]):7) 
     f_hi_m <- f_hi_m %>% select(FECHA,Unidades:Semana_mes)
-    f_hi_m<-data.table(f_hi_m)
+    f_hi_m <- data.table(f_hi_m)
     
     if (nrow(f_hi_m)==0){next}
     f_hi_m[,maximo:=max(Unidades),by=semana]
-    f_hi_m<-f_hi_m[maximo>0,]
-    f_hi_m<-data.frame(f_hi_m)
+    f_hi_m <- f_hi_m[maximo>0,]
+    f_hi_m <- data.frame(f_hi_m)
         # Calculamos la densidad semanal
   
     densidad_semana <- densidad.semana(f_hi_m, dia.codigo, m=S_M$n[j]) 
@@ -93,8 +90,6 @@ if(k==1){
   }
 
 }
-
-
 #=======================================================================================
 # Multiplicar unidades por densidad 
 #=======================================================================================

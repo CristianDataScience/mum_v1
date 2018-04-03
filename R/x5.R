@@ -1,9 +1,8 @@
 #=======================================================================================
 # Preparación del MES ANTES de la Desagregacion Temporaral
-#=======================================================================================
 # Trabajamo Marzo de Piloto con 5 semanaS desde MES_A__PROYECTAR2.sql
 #=======================================================================================
-Marzo <- read_excel("INPUT/Marzo.xlsx")
+Marzo <- read_excel("Marzo.xlsx")
 #=======================================================================================
 Marzo$semana <- semana.completa(Marzo$dia_semana)+1 
 #=======================================================================================
@@ -40,7 +39,6 @@ rm(tipo_dia)
 sm <- Marzo %>% group_by(semana) %>% summarise(tipo_semana=sum(tipo_dia))
 Marzo <- merge(Marzo,sm,by ="semana")
 rm(sm)
-
 #=======================================================================================
 # Queremos información sólo de las SEMANAS_de_MARZO
 #=======================================================================================
