@@ -176,7 +176,7 @@ centros <- function(filtro_historico){
   #=====================================================================================
   # Vamos a calcular el promedio con kmedias n=1
   #=====================================================================================
-  kmeans = kmeans(x = dc2[2:3], centers = 1, nstart=25) 
+  kmeans = kmeans(x = dc2[2:3], centers = 1, nstart=5) 
   #=====================================================================================
   # Guardamos el centros
   centro <- as.data.frame(kmeans$centers)
@@ -193,7 +193,6 @@ desag.co <- function(filtro_proyeccion,centros){
   return(desag_co)
 }
 #=======================================================================================
-
 
 #=======================================================================================
 # FUNCIONES DE LA DESAGREGACION TEMPORAL

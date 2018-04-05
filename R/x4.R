@@ -1,10 +1,7 @@
-
 #=======================================================================================
 # Vamos a calcular la desagregación comercial en los 5 CEDIS
 #=======================================================================================
 filtro.cedi <- function(proyeccion_pgc,historia_wms){
-  
-  
   
   dis_flujo <- unique(p_pgc$FLUJO)
   dis_tarea <- unique(p_pgc$TAREA)
